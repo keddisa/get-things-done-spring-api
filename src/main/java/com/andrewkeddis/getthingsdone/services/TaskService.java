@@ -23,8 +23,14 @@ public class TaskService {
 		
 	}
 	
-	public List<TaskDisplay> findAllDisplay() {
-		List<Task> tasks = taskDao.findAllDisplay();
+	public List<TaskDisplay> findAllDisplay(String userId) {
+		String updatedUserId = "";
+		for(int i=0; i<userId.length(); i++) {
+			if ("0123456789".contains(Character.toString(userId.charAt(i)))) {
+				updatedUserId += userId.charAt(i);
+			}
+		}
+		List<Task> tasks = taskDao.findAllDisplay(updatedUserId);
 		return refactorTasks(tasks);
 	}
 	
@@ -38,13 +44,16 @@ public class TaskService {
 		}
 	}
 
-	public List<TaskDisplay> findByCategory(String category) {
-		return refactorTasks(taskDao.findByCategory(category));
+	public List<TaskDisplay> findByCategory(String category, String userId) {
+		String updatedUserId = "";
+		for(int i=0; i<userId.length(); i++) {
+			if ("0123456789".contains(Character.toString(userId.charAt(i)))) {
+				updatedUserId += userId.charAt(i);
+			}
+		}
+		return refactorTasks(taskDao.findByCategory(category, updatedUserId));
 	}
 	
-//	public List<Task> findByPriority() {
-//		return taskDao.findAllOrderByPriorityDesc();
-//	}
 
 	public Task removeTask(int id) {
 		Optional<Task> tempTask = taskDao.findById(id);
@@ -65,12 +74,15 @@ public class TaskService {
 			if(task.getPending() == null) {
 				task.setPending(tempTask.get().getPending()); 
 			}	
+			if(task.getCreatorId() == null) {
+				task.setCreatorId(tempTask.get().getCreatorId()); 
+			}	
 		}
 		return refactorTask(taskDao.save(task));
 	}
 
-	public Task save(Task task) {
-		return taskDao.save(task);
+	public TaskDisplay save(Task task) {
+		return refactorTask(taskDao.save(task));
 	}
 	
 	public String deleteById(int id) {

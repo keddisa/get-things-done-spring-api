@@ -24,9 +24,9 @@ public class TaskController {
 	@Autowired
 	private TaskService taskService;
 	
-	@GetMapping("/")
-	public List<TaskDisplay> findAllDisplay() {
-		return taskService.findAllDisplay();
+	@PostMapping("/")
+	public List<TaskDisplay> findAllDisplay(@RequestBody String userId) {
+		return taskService.findAllDisplay(userId);
 	}
 	
 	@GetMapping("/all")
@@ -39,14 +39,14 @@ public class TaskController {
 		return taskService.findTask(id);
 	}
 	
-	@GetMapping("/category/{category}")
-	public List<TaskDisplay> findByCategory(@PathVariable(value="category") String category) {
-		return taskService.findByCategory(category);
+	@PostMapping("/category/{category}")
+	public List<TaskDisplay> findByCategory(@PathVariable(value="category") String category, @RequestBody String userId) {
+		return taskService.findByCategory(category, userId);
 	}
 	
 	
-	@PostMapping(value="/")
-	public Task createTask(@RequestBody Task task) {
+	@PostMapping(value="/new")
+	public TaskDisplay createTask(@RequestBody Task task) {
 		task.setDisplay(true);
 		task.setPending(true);
 		return taskService.save(task);

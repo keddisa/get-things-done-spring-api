@@ -38,12 +38,14 @@ public class Task {
 	@CreationTimestamp
 	@Column(name="created_at")
 	private Date createdAt;
+	@Column(name="creator_id")
+	private String creatorId;
 	
 	public Task() {
 	}
 
 	public Task(String title, String description, String category, Date deadline, int priority, String status,
-			Boolean pending, Boolean display, Date createdAt) {
+			Boolean pending, Boolean display, Date createdAt, String creatorId) {
 		this.title = title;
 		this.description = description;
 		this.category = category;
@@ -53,6 +55,7 @@ public class Task {
 		this.pending = pending;
 		this.display = display;
 		this.createdAt = createdAt;
+		this.creatorId = creatorId;
 	}
 
 	public int getId() {
@@ -135,13 +138,20 @@ public class Task {
 		this.createdAt = createdAt;
 	}
 
+	public String getCreatorId() {
+		return creatorId;
+	}
+
+	public void setCreatorId(String creatorId) {
+		this.creatorId = creatorId;
+	}
+
 	@Override
 	public String toString() {
 		return "Task [id=" + id + ", title=" + title + ", description=" + description + ", category=" + category
 				+ ", deadline=" + deadline + ", priority=" + priority + ", status=" + status + ", pending=" + pending
-				+ ", display=" + display + ", createdAt=" + createdAt + "]";
+				+ ", display=" + display + ", createdAt=" + createdAt + ", creatorId=" + creatorId + "]";
 	}
-	
-	
+
 	
 }

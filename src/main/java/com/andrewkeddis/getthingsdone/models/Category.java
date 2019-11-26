@@ -16,14 +16,17 @@ public class Category {
 	private int id;
 	@Column(name="category_name")
 	private String name;
+	@Column(name="creator_id")
+	private String creatorId;
 	
 	public Category() {
 		
 	}
 
-	public Category(int id, String name) {
+	public Category(int id, String name, String creatorId) {
 		this.id = id;
 		this.name = name;
+		this.creatorId = creatorId;
 	}
 
 	public int getId() {
@@ -41,7 +44,18 @@ public class Category {
 	public void setName(String name) {
 		this.name = name;
 	}
-	
-	
+
+	public String getCreatorId() {
+		return creatorId;
+	}
+
+	public void setCreatorId(String creatorId) {
+		this.creatorId = creatorId;
+	}
+
+	@Override
+	public String toString() {
+		return "Category [id=" + id + ", name=" + name + ", creatorId=" + creatorId + "]";
+	}
 	
 }

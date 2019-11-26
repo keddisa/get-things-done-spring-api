@@ -21,11 +21,11 @@ import com.andrewkeddis.getthingsdone.services.CategoryService;
 @CrossOrigin(origins = "*", allowedHeaders = "*")
 public class CategoryController {
 	@Autowired
-	private CategoryService categoryService;
+	private CategoryService categoryService; 
 	
-	@GetMapping("/")
-	public List<Category> findAll() {
-		return categoryService.findAll();
+	@PostMapping("/")
+	public List<Category> findAllByUser(@RequestBody String userId) {
+		return categoryService.findAllByUser(userId);
 	}
 	
 	@GetMapping("/{id}")
@@ -33,7 +33,7 @@ public class CategoryController {
 		return categoryService.findCategory(id);
 	}
 	
-	@PostMapping(value="/")
+	@PostMapping(value="/new")
 	public Category createTask(@RequestBody Category category) {
 		return categoryService.save(category);
 	}

@@ -9,10 +9,10 @@ import org.springframework.data.repository.query.Param;
 import com.andrewkeddis.getthingsdone.models.Task;
 
 public interface TaskDao extends JpaRepository<Task, Integer> {
-	@Query("select t from Task t where t.display = true")
-	List<Task> findAllDisplay();
-	@Query("select t from Task t where t.display = true and t.category =:category")
-	List<Task> findByCategory(@Param("category") String category);
+	@Query("select t from Task t where t.display = true and t.creatorId =:creatorId")
+	List<Task> findAllDisplay(@Param("creatorId") String creatorId);
+	@Query("select t from Task t where t.display = true and t.category =:category and t.creatorId =:creatorId")
+	List<Task> findByCategory(@Param("category") String category, @Param("creatorId") String creatorId);
 	
 //	List<Task> findAllOrderByPriorityDesc();
 }

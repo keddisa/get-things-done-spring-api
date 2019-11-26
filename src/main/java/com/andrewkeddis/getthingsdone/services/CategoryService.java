@@ -15,8 +15,14 @@ public class CategoryService {
 	@Autowired
 	CategoryDao categoryDao;
 	
-	public List<Category> findAll() {
-		return categoryDao.findAll();
+	public List<Category> findAllByUser(String userId) {
+		String updatedUserId = "";
+		for(int i=0; i<userId.length(); i++) {
+			if ("0123456789".contains(Character.toString(userId.charAt(i)))) {
+				updatedUserId += userId.charAt(i);
+			}
+		}
+		return categoryDao.findByCreatorId(updatedUserId);
 	}
 	
 	
@@ -43,7 +49,8 @@ public class CategoryService {
 	}
 
 	public Category save(Category category) {
-		return categoryDao.save(category);
+		System.out.println(category);
+		return categoryDao.save(category); 
 	}
 	
 	public String deleteById(int id) {
