@@ -1,157 +1,59 @@
 package com.andrewkeddis.getthingsdone.models;
 
-import java.util.Date;
-
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
-import javax.persistence.Table;
-
+import lombok.*;
 import org.hibernate.annotations.CreationTimestamp;
 
+import javax.persistence.*;
+import java.util.Calendar;
+
 @Entity
-@Table(name="tasks")
+@Table(name = "tasks")
+@NoArgsConstructor
+@AllArgsConstructor
+@Setter
+@Getter
+@Builder
 public class Task {
-	@Id
-	@GeneratedValue(strategy=GenerationType.IDENTITY)
-	@Column(name="id")
-	private int id;
-	@Column(name="title")
-	private String title;
-	@Column(name="description")
-	private String description;
-	@Column(name="category")
-	private String category;
-	@Column(name="deadline")
-	private Date deadline;
-	@Column(name="priority")
-	private int priority;
-	@Column(name="status")
-	private String status;
-	@Column(name="pending")
-	private Boolean pending;
-	@Column(name="display")
-	private Boolean display;
-	
-	@CreationTimestamp
-	@Column(name="created_at")
-	private Date createdAt;
-	@Column(name="creator_id")
-	private String creatorId;
-	
-	public Task() {
-	}
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Column
+    private int id;
 
-	public Task(String title, String description, String category, Date deadline, int priority, String status,
-			Boolean pending, Boolean display, Date createdAt, String creatorId) {
-		this.title = title;
-		this.description = description;
-		this.category = category;
-		this.deadline = deadline;
-		this.priority = priority;
-		this.status = status;
-		this.pending = pending;
-		this.display = display;
-		this.createdAt = createdAt;
-		this.creatorId = creatorId;
-	}
+    @Column
+    private String title;
 
-	public int getId() {
-		return id;
-	}
+    @Column
+    private String description;
 
-	public void setId(int id) {
-		this.id = id;
-	}
+    @Column
+    private String category;
 
-	public String getTitle() {
-		return title;
-	}
+    @Column
+    private Calendar deadline;
 
-	public void setTitle(String title) {
-		this.title = title;
-	}
+    @Column
+    private int priority;
 
-	public String getDescription() {
-		return description;
-	}
+    @Column
+    private String status;
 
-	public void setDescription(String description) {
-		this.description = description;
-	}
+    @Column
+    private Boolean pending;
 
-	public String getCategory() {
-		return category;
-	}
+    @Column
+    private Boolean display;
 
-	public void setCategory(String category) {
-		this.category = category;
-	}
+    @CreationTimestamp
+    @Column
+    private Calendar createdAt;
 
-	public Date getDeadline() {
-		return deadline;
-	}
+    @Column
+    private String creatorId;
 
-	public void setDeadline(Date deadline) {
-		this.deadline = deadline;
-	}
-
-	public int getPriority() {
-		return priority;
-	}
-
-	public void setPriority(int priority) {
-		this.priority = priority;
-	}
-
-	public String getStatus() {
-		return status;
-	}
-
-	public void setStatus(String status) {
-		this.status = status;
-	}
-
-	public Boolean getPending() {
-		return pending;
-	}
-
-	public void setPending(Boolean pending) {
-		this.pending = pending;
-	}
-
-	public Boolean getDisplay() {
-		return display;
-	}
-
-	public void setDisplay(Boolean display) {
-		this.display = display;
-	}
-
-	public Date getCreatedAt() {
-		return createdAt;
-	}
-
-	public void setCreatedAt(Date createdAt) {
-		this.createdAt = createdAt;
-	}
-
-	public String getCreatorId() {
-		return creatorId;
-	}
-
-	public void setCreatorId(String creatorId) {
-		this.creatorId = creatorId;
-	}
-
-	@Override
-	public String toString() {
-		return "Task [id=" + id + ", title=" + title + ", description=" + description + ", category=" + category
-				+ ", deadline=" + deadline + ", priority=" + priority + ", status=" + status + ", pending=" + pending
-				+ ", display=" + display + ", createdAt=" + createdAt + ", creatorId=" + creatorId + "]";
-	}
-
-	
+    @Override
+    public String toString() {
+        return "Task [id=" + id + ", title=" + title + ", description=" + description + ", category=" + category
+                + ", deadline=" + deadline + ", priority=" + priority + ", status=" + status + ", pending=" + pending
+                + ", display=" + display + ", createdAt=" + createdAt + ", creatorId=" + creatorId + "]";
+    }
 }

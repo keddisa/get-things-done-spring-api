@@ -1,12 +1,10 @@
 package com.andrewkeddis.getthingsdone.dao;
 
+import com.andrewkeddis.getthingsdone.models.Category;
+import org.springframework.data.jpa.repository.JpaRepository;
 
 import java.util.List;
 
-import org.springframework.data.jpa.repository.JpaRepository;
-
-import com.andrewkeddis.getthingsdone.models.Category;
-
 public interface CategoryDao extends JpaRepository<Category, Integer> {
-	List<Category> findByCreatorId(String creatorId);
+    List<Category> findByCreatorId(String creatorId);
 }
